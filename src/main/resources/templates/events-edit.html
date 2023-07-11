@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="www.ultraq.net.nz/themyleaf/layout">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Events Create</title>
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <!-- Bootstrap icons-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+      <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">Find Clubs</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Find Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="pricing.html">Directory</a></li>
+          <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Welcome</a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
+              <li><a class="dropdown-item" href="blog-home.html">Blog Home</a></li>
+              <li><a class="dropdown-item" href="blog-post.html">Blog Post</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Portfolio</a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
+              <li><a class="dropdown-item" href="portfolio-overview.html">Portfolio Overview</a></li>
+              <li><a class="dropdown-item" href="portfolio-item.html">Portfolio Item</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <section layout:fragment="body" class="py-5 container-fluid">
+    <form role="form" method="post" th:action="@{/events/{eventId}/edit(eventId=${eventId})}" th:object="${event}">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                th:field="*{name}"
+                placeholder="Event name">
+        <p th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></p>
+      </div>
+      <div class="mb-3">
+        <label for="photoUrl" class="form-label">Photo URL</label>
+        <input
+                type="text"
+                class="form-control"
+                id="photoUrl"
+                name="photoUrl"
+                th:field="*{photoUrl}"
+                placeholder="Photo Url"
+                aria-describedby="emailHelp">
+        <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
+      </div>
+      <div class="mb-3">
+        <label for="type" class="form-label">Type</label>
+        <input
+                type="text"
+                class="form-control"
+                id="type"
+                name="type"
+                th:field="*{type}"
+                placeholder="Type"
+                aria-describedby="emailHelp">
+        <p th:if="${#fields.hasErrors('type')}" class="text-danger" th:errors="*{type}"></p>
+      </div>
+      <div class="mb-3">
+        <label for="startTime" class="form-label">Type</label>
+        <input
+                type="datetime-local"
+                class="form-control"
+                id="startTime"
+                name="type"
+                th:field="*{startTime}"
+                placeholder="Start Time"
+                aria-describedby="emailHelp">
+        <p th:if="${#fields.hasErrors('startTime')}" class="text-danger" th:errors="*{startTime}"></p>
+      </div>
+      <div class="mb-3">
+        <label for="endTime" class="form-label">Type</label>
+        <input
+                type="datetime-local"
+                class="form-control"
+                id="endTime"
+                name="endTime"
+                th:field="*{endTime}"
+                placeholder="Start Time"
+                aria-describedby="emailHelp">
+        <p th:if="${#fields.hasErrors('endTime')}" class="text-danger" th:errors="*{endTime}"></p>
+      </div>
+      <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+  </section>
+</main>
+</body>
+
+</html>
