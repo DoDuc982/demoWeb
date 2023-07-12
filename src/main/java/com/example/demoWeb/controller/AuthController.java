@@ -13,35 +13,36 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AuthController {
-    private final UserService userService;
-    public AuthController (UserService userService){
+    private UserService userService;
+
+    public AuthController(UserService userService) {
         this.userService = userService;
     }
+
+    @GetMapping("/login")
+    public String loginPage(){
+        return "login";
+    }
+
     @GetMapping("/register")
-    public String getRegisterForm(Model model){
+    public String getRegisterForm(Model model) {
         RegistrationDto user = new RegistrationDto();
         model.addAttribute("user", user);
         return "register";
     }
-    @GetMapping("/login")
-    public String loginPage(){
-        return "/login";
-    }
+
     @PostMapping("/register/save")
-    public String register(
-            @Valid @ModelAttribute("User") RegistrationDto user,
-            BindingResult result,
-            Model model
-    ){
+    public String register(@Valid @ModelAttribute("user")RegistrationDto user,
+                           BindingResult result, Model model) {
         UserEntity existingUserEmail = userService.findByEmail(user.getEmail());
-        if (existingUserEmail != null && existingUserEmail.getEmail() != null && !existingUserEmail.getEmail().isEmpty()){
+        if(existingUserEmail != null && existingUserEmail.getEmail() != null && !existingUserEmail.getEmail().isEmpty()) {
             return "redirect:/register?fail";
         }
-        UserEntity existingUsername = userService.findByUsername(user.getUsername());
-        if (existingUsername != null && existingUsername.getUsername() != null && !existingUsername.getUsername().isEmpty()){
+        UserEntity existingUserUsername = userService.findByUsername(user.getUsername());
+        if(existingUserUsername != null && existingUserUsername.getUsername() != null && !existingUserUsername.getUsername().isEmpty()) {
             return "redirect:/register?fail";
         }
-        if (result.hasErrors()){
+        if(result.hasErrors()) {
             model.addAttribute("user", user);
             return "register";
         }
